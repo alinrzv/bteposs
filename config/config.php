@@ -10,10 +10,14 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'api_user' => '',
+    'api_user' => 'test',
 
-    'api_key' => '',
+    'api_key' => 'test',
     
-    'api_mode' => '',
+    'api_mode' => 'test',
+    
+    "returnUrl" => "", 
+    
+    "failUrl" => "", 
 
 ];

@@ -4,14 +4,8 @@ namespace BtEcommerce\BTEposs;
 
 class EpossCloudRestClient
 {
-    $API_TEST			= 'https://ecclients.btrl.ro:5443/payment/rest';
-    $API_LIVE			= 'https://ecclients.btrl.ro/payment/rest';
-    
-    if(config('bteposs.api_mode') == "live"){
-    const API_URL = $API_LIVE;
-    }else {
-    const API_URL = $API_TEST;
-    }
+    const API_TEST			= 'https://ecclients.btrl.ro:5443/payment/rest';
+    const API_LIVE		= 'https://ecclients.btrl.ro/payment/rest';
     
     const PHASE_ONE_ORDER		= '/register.do';
     const PHASE_TWO_ORDER		= '/registerPreAuth.do';
@@ -76,9 +70,12 @@ class EpossCloudRestClient
 
         if ($status!=200) {
             $errorMessage = json_decode($return, true);
+            
+            $errorMessage = !empty($errorMessage['errorText']) ? $errorMessage['errorText'] : $return;
+            
             throw new \Exception($errorMessage);
             // empty response
-            $return = $errorMessage;
+            $return = '';
         }
 
         return $return;
@@ -86,7 +83,13 @@ class EpossCloudRestClient
 
     public function PhaseOnePay($data)
     {
-        return $this->_queryApi(self::API_URL.self::PHASE_ONE_ORDER $data);
+    
+	if(config('BTEposs.api_mode') == "live"){
+		return $this->_queryApi(self::API_LIVE.self::PHASE_ONE_ORDER ,$data);
+	}else {
+		return $this->_queryApi(self::API_TEST.self::PHASE_ONE_ORDER ,$data);
+	}
+        
     }
 
 }
