@@ -1,0 +1,55 @@
+    {
+    "name": "BtEcommerce/BTEposs",
+    "description": "BTEposs API wrapper",
+    "keywords": [
+        "alinrzv",
+        "bteposs"
+    ],
+    "homepage": "https://github.com/alinrzv/BTEposs",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Razvan",
+            "email": "admin@webake.ro",
+            "role": "Developer"
+        }
+    ],
+    
+    "require": {
+        "php" : "^7.2.5|^8.0",
+        "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.8.*",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BtEcommerce\\BTEposs\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BtEcommerce\\BTEposs\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BtEcommerce\\BTEposs\\BTEpossServiceProvider"
+            ],
+            "aliases": {
+                "BTEposs": "BtEcommerce\\BTEposs\\BTEpossFacade"
+            }
+        }
+    }
+}
